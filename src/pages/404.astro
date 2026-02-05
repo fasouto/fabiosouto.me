@@ -1,0 +1,77 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+---
+
+<DefaultLayout title="Page not found">
+  <section class="not-found my-24">
+    <div class="container">
+      <h1 class="title">404</h1>
+      <div class="message-wrapper">
+        <p class="message">This page doesn't exist</p>
+        <span class="annotation">maybe it never did?</span>
+      </div>
+      <a href="/" class="home-link">Back to home</a>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+  }
+
+  .title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(5rem, 15vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -4px;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .message-wrapper {
+    position: relative;
+    margin: 1rem 0 2rem;
+  }
+
+  .message {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: #555;
+    margin: 0;
+  }
+
+  .annotation {
+    position: absolute;
+    left: calc(50% + 140px);
+    top: 50%;
+    transform: translateY(-50%) rotate(-2deg);
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #b85c38;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .annotation {
+      position: static;
+      transform: rotate(-2deg);
+      display: block;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .home-link {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #b85c38;
+    text-decoration: none;
+  }
+
+  .home-link:hover {
+    text-decoration: underline;
+  }
+</style>

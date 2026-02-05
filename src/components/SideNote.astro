@@ -1,0 +1,11 @@
+---
+interface Props {
+  offset?: string;
+}
+
+const { offset = '0' } = Astro.props;
+---
+
+<span class="sidenote" style={`top: ${offset};`}>
+  <slot />
+</span>

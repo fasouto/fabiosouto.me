@@ -1,0 +1,161 @@
+---
+title: "Unix tips and tricks"
+subtitle: "Small things that save time"
+date: 2015-06-12
+updated: 2025-10-15
+---
+
+import SideNote from '@components/SideNote.astro'
+
+I keep coming back to this story: in 1986, Jon Bentley asked Donald Knuth to demonstrate literate programming by writing a program to count word frequencies. Knuth wrote an elegant 10+ page solution. Doug McIlroy, asked to review Knuth's work, offered an interesting counterpoint in just 6 lines of shell:
+
+```bash
+tr -cs A-Za-z '\n' | tr A-Z a-z | sort | uniq -c | sort -rn | sed ${1}q
+```
+
+Worth mentioning: this wasn't a competition or a criticism. Knuth is one of the greatest programmers alive. He was demonstrating how to write complete programs from scratch. McIlroy was showing what happens when you compose small tools that already exist.
+
+Once the Unix philosophy clicks, you start seeing these shortcuts everywhere. Here are the ones I actually use.
+
+## History
+
+`!!` repeats the last command. `sudo !!` is your friend when you forget sudo.
+
+`!$` gets the last argument. Create a directory and cd into it:
+
+```bash
+mkdir /tmp/new
+cd !$
+```
+
+`^foo^bar` runs the previous command replacing foo with bar. Great for typos.
+
+`Ctrl + r` searches history. But if you install [fzf](https://github.com/junegunn/fzf), it replaces the default search with a fuzzy finder. Game changer. <SideNote>seriously, install fzf</SideNote>
+
+## Prevent accidents
+
+I've lost files to careless `rm` and `mv`. Now I use these aliases:
+
+```bash
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+```
+
+The `-i` flag asks before overwriting or deleting.
+
+## Readline shortcuts
+
+Navigation:
+- `Ctrl + a` beginning of line
+- `Ctrl + e` end of line
+- `Alt + b` back one word
+- `Alt + f` forward one word
+
+Editing:
+- `Ctrl + w` delete word backward
+- `Ctrl + u` delete to beginning of line
+- `Ctrl + k` delete to end of line
+- `Ctrl + y` paste what you deleted
+
+Search:
+- `Ctrl + r` search history backward
+- `Ctrl + g` cancel search
+
+## Directory tricks
+
+`cd -` returns to the previous directory.
+
+`mkdir -p` creates nested directories:
+
+```bash
+mkdir -p project/{src,tests,docs}
+```
+
+For jumping to frequently used directories, [zoxide](https://github.com/ajeetdsouza/zoxide) learns your habits. After visiting a directory once, `z project` takes you there from anywhere.
+
+## Brace expansion
+
+Copy a file with a new extension without typing the name twice:
+
+```bash
+cp config.json{,.backup}
+```
+
+## Rsync
+
+Once you use rsync, you never go back to scp. It only transfers what changed:
+
+```bash
+rsync -avz ./local/ user@server:/remote/
+```
+
+## Quick commands
+
+Pretty print JSON:
+```bash
+jq . file.json
+```
+
+If you don't have jq installed: `python3 -m json.tool file.json`
+
+Get your external IP:
+```bash
+curl ifconfig.me
+```
+
+Serve current directory over HTTP:
+```bash
+python3 -m http.server 8000
+```
+
+Empty a file:
+```bash
+> file.log
+```
+
+## Job control
+
+You started a long download and forgot to use `nohup`. Now you need to leave. Don't cancel it:
+
+```bash
+Ctrl + z    # pause
+bg          # resume in background
+disown %1   # detach from session
+```
+
+Now you can close the terminal and the job keeps running.
+
+## macOS specific
+
+Copy command output to clipboard:
+```bash
+cat file.txt | pbcopy
+```
+
+Paste from clipboard:
+```bash
+pbpaste > file.txt
+```
+
+Open files or URLs with default app:
+```bash
+open file.pdf
+open https://example.com
+open .   # opens current folder in Finder
+```
+
+Prevent sleep during a long task:
+```bash
+caffeinate -i long_running_script.sh
+```
+
+Quick Look from terminal:
+```bash
+qlmanage -p file.pdf 2>/dev/null
+```
+
+Flush DNS cache:
+```bash
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+```

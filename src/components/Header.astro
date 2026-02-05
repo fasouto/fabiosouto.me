@@ -1,0 +1,177 @@
+---
+import Logo from './Logo.astro'
+---
+
+<header>
+  <div id="main-navigation" class="py-8">
+    <div class="container">
+      <Logo />
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <nav aria-label="Main navigation">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="/articles/">articles</a>
+          </li>
+          <li class="menu-item">
+            <a href="/projects/">projects</a>
+          </li>
+          <li class="menu-item">
+            <a href="/about/">about</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  #main-navigation > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #1a1a1a;
+    position: relative;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #1a1a1a;
+    left: 0;
+  }
+
+  .hamburger::before {
+    top: -7px;
+  }
+
+  .hamburger::after {
+    top: 7px;
+  }
+
+  .menu {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .menu-item:not(:first-child)::before {
+    content: '/';
+    margin-right: 1.5rem;
+    color: #ccc;
+    font-weight: 300;
+  }
+
+  a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: #b85c38;
+  }
+
+  @media (max-width: 640px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    nav {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    nav.open {
+      max-height: 300px;
+      padding-top: 2rem;
+      padding-bottom: 1rem;
+    }
+
+    .menu {
+      flex-direction: column;
+      gap: 0;
+      text-align: left;
+      border-bottom: 1px solid #e0dcd4;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .menu-item::before {
+      display: none;
+    }
+
+    .menu a {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 600;
+      padding: 0.75rem 0;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a:active,
+    .menu a[aria-current="page"] {
+      color: #b85c38;
+    }
+  }
+
+  /* Hamburger animation */
+  .menu-toggle[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
+
+  .menu-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after {
+    transition: all 0.2s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-navigation nav');
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = nav?.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+</script>

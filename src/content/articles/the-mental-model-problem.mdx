@@ -1,0 +1,60 @@
+---
+title: "The mental model problem"
+subtitle: "AI writes code faster than you can understand it"
+date: 2025-02-03
+draft: true
+---
+
+import SideNote from '@components/SideNote.astro'
+
+Everything is getting faster: media, relationships, trends... For some time I thought coding was immune to that. I was absolutely wrong...
+
+A month ago I refactored a small project with Claude Code. It was amazing. A couple of prompts, tests passed, deployed, moved on. A week passed and the server started crashing. Memory leak. I opened the project and I had no idea how to diagnose it, honestly I had no idea where to start.
+
+I completely skipped the slow part of coding. Turns out the slow part was the whole point.
+
+## The map you're not building
+
+When you write code yourself, you're not just typing. You're building a mental map. Every bug you chase, every weird edge case, every "why the hell is this happening". It all goes into that map. Eventually you can navigate your codebase because you suffered through it.
+
+When the LLM writes the code, you skip all that. It gives you something that works, looks reasonable, runs fine. Your brain goes "cool, next task." No map built.
+
+When you're coding, you're also thinking about the product. You hit an edge case and suddenly you're asking "wait, what should actually happen here?" Some of my best product ideas came while writing code, not in meetings. The code forces you to be specific in ways that specs never do.
+
+The bottleneck used to be typing. Now, the bottleneck is understanding. AI lets you skip that too if you're not careful.
+
+## The slot machine
+
+Nir Eyal wrote [*Hooked*](https://www.nirandfar.com/hooked/) about how products create habits through variable rewards. <SideNote>great read</SideNote> AI coding is exactly that. Sometimes it nails something in seconds that would've taken you an hour. Instant dopamine surge. So you keep pulling the lever, even when the odds aren't great.
+
+Going back to manual coding feels impossibly slow. Why would you? Don't you have emails to check? Other things to do?
+
+The main problem is that the code just... looks correct. Clean variable names. Familiar patterns. Plausible explanations. The right amount of comments. Your brain relaxes. I've nodded along to AI code that was confidently, politely, totally wrong. Tests passed. But the logic was broken in a way I only caught because I traced through it manually.
+
+Maybe the worst offender (at least for me) are AI-generated tests. I've seen it create a mock and then test the mock. Or tests that assert the function returns what it returns. Circular nonsense that looks like coverage but tests nothing. If you're not paying attention, you'll merge it and feel good about your test suite.
+
+Sometimes you need to stop prompting and just open your favorite editor. Resist the dopamine hit.
+
+## When vibe coding works
+
+Don't think I'm anti-AI. I use it every day.
+
+I had the code for [RandomWheel](https://randomwheel.com/) sitting around for years with an outdated version of Nuxt. I needed to add moderation, so I rebuilt from scratch with Claude Code. <SideNote>people were submitting adult wheels 🤦</SideNote>
+
+That project was perfect for vibe coding. I already had an old implementation. It's small enough to refactor with LLMs. Simple enough to verify. 
+
+It was almost one-shotted. AI on familiar ground works.
+
+## What I try to do
+
+- Read. Every. Line. Before. Accepting
+- Rewrite parts myself, even when it's slower
+- If I can't explain it, I don't ship it
+- For bigger tasks, write a plan first. It builds the mental model before any code exists
+- Use AI to explain code, not just write it. Ask it to walk through confusing functions. Most people only use AI for output. Using it for comprehension is underrated.
+
+I break these rules all the time. I'm still figuring this out. <SideNote>aren't we all?</SideNote>
+
+The real danger is using AI to build something you don't understand yet. In a domain you haven't mapped. You ship faster and understand less.
+
+Use the tools. Enjoy the speed. We're all still experimenting. Just don't skip the struggle.

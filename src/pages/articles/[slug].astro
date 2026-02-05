@@ -1,0 +1,208 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft)
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }))
+}
+
+const { article } = Astro.props
+const { Content } = await render(article)
+const updatedDate = article.data.updated ? new Date(article.data.updated) : null
+---
+
+<DefaultLayout title={article.data.title}>
+  <article class="article my-24">
+    <header class="article-header container">
+      <h1 class="article-title">{article.data.title}</h1>
+      {article.data.subtitle && (
+        <p class="article-subtitle">{article.data.subtitle}</p>
+      )}
+      <div class="article-date">
+        <time datetime={article.data.date.toISOString()}>
+          {article.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
+        </time>
+        {updatedDate && (
+          <span class="article-updated">
+            · Updated <time datetime={updatedDate.toISOString()}>
+              {updatedDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' })}
+            </time>
+          </span>
+        )}
+      </div>
+    </header>
+    <div class="article-container">
+      <div class="article-content prose prose-lg max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</DefaultLayout>
+
+<style is:global>
+  .article-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .article-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .article-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #1a1a1a;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .article-subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: #b85c38;
+    margin: 0;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  .article-date {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1rem;
+  }
+
+  .article-content {
+    position: relative;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3rem;
+  }
+
+  .article-content h2,
+  .article-content h3,
+  .article-content h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .sidenote {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: #b85c38;
+    transform: rotate(-1deg);
+  }
+
+  @media (min-width: 1200px) {
+    .sidenote {
+      float: right;
+      clear: right;
+      margin-right: -260px;
+      width: 220px;
+      margin-top: -0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 .sidenote,
+    h3 .sidenote {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .sidenote {
+      display: block;
+      margin: 1rem 0;
+      padding-left: 1rem;
+      border-left: 2px solid #b85c38;
+    }
+  }
+
+  /* Code block styling */
+  .article-content pre {
+    background-color: #f5f2ed;
+    border: 1px solid #e0dcd4;
+    border-radius: 8px;
+  }
+
+  .article-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    color: #c7254e;
+    font-size: 0.85rem;
+    vertical-align: text-bottom;
+  }
+
+  .article-content code::before,
+  .article-content code::after {
+    content: none !important;
+  }
+
+  .article-content :not(pre) > code {
+    background-color: #f5f2ed;
+    padding: 0 0.3em;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .article-content pre code {
+    color: #1a1a1a;
+    font-size: 0.9rem;
+  }
+
+  /* Interactive checkboxes */
+  .article-content input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #b85c38;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    position: relative;
+    top: -0.1em;
+  }
+
+  .article-content li:has(> input[type="checkbox"]) {
+    list-style: none;
+    margin-left: -1.5rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .article-content li:has(> input[type="checkbox"]) > ul {
+    margin-left: 1.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+  }
+
+  .article-content li:has(> input[type="checkbox"]) > ul li {
+    margin-bottom: 0;
+  }
+
+  .article-content li.checked {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  /* Links */
+  .article-content a {
+    color: #b85c38;
+    text-decoration: underline;
+    text-decoration-color: #b85c3866;
+    text-underline-offset: 2px;
+  }
+
+  .article-content a:hover {
+    text-decoration-color: #b85c38;
+  }
+</style>

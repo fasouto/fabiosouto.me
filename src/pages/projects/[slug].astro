@@ -1,0 +1,66 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects')
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }))
+}
+
+const { project } = Astro.props
+const { Content } = await render(project)
+---
+
+<DefaultLayout title={project.data.title}>
+  <article class="project my-24">
+    <div class="container">
+      <header class="project-header">
+        <h1 class="project-title">{project.data.title}</h1>
+        {project.data.subtitle && (
+          <p class="project-subtitle">{project.data.subtitle}</p>
+        )}
+        {!project.data.subtitle && project.data.description && (
+          <p class="project-subtitle">{project.data.description}</p>
+        )}
+      </header>
+      <div class="project-content">
+        <Content />
+      </div>
+    </div>
+  </article>
+</DefaultLayout>
+
+<style>
+  .project-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .project-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .project-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-style: italic;
+    font-weight: 400;
+    color: #555;
+    margin: 0;
+  }
+
+  .project-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    line-height: 1.8;
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+title: "Website prelaunch checklist"
+subtitle: "Things to check before launch day"
+date: 2014-03-10
+updated: 2026-01-01
+---
+
+import SideNote from '@components/SideNote.astro'
+import ChecklistInteractive from '@components/ChecklistInteractive.astro'
+
+I'm forgetful, so I keep this list for myself. It helps me reinforce good practices. Keep in mind that not everything applies to every project.
+
+Your progress is saved on this device. You can reset it at the bottom of the page.
+
+## Content
+
+- [ ] All copy is written and proofread
+- [ ] No placeholder text (Lorem ipsum, "Coming soon")
+- [ ] Images are final and optimized
+- [ ] Links point to real destinations
+- [ ] Contact information is correct
+- [ ] Dates and prices are accurate
+- [ ] Legal pages ready (Privacy Policy, Terms of Service)
+- [ ] 404 page has helpful content and navigation
+- [ ] Favicon configured (include apple-touch-icon)
+
+## Functionality
+
+- [ ] Test all forms end-to-end
+  - [ ] Validation shows clear errors
+  - [ ] Success states work
+  - [ ] Emails are received
+- [ ] Test payment flows with real cards (use test mode)
+- [ ] Search returns relevant results
+- [ ] Authentication flows work (login, signup, reset password)
+- [ ] Third-party integrations respond correctly
+- [ ] No console errors in browser DevTools
+- [ ] Test with JavaScript disabled (graceful degradation)
+
+## Security
+
+- [ ] HTTPS everywhere ([SSL Labs test](https://www.ssllabs.com/ssltest/))
+- [ ] HTTP redirects to HTTPS
+- [ ] Security headers configured ([securityheaders.com](https://securityheaders.com/))
+  - [ ] Content-Security-Policy
+  - [ ] X-Frame-Options
+  - [ ] X-Content-Type-Options
+- [ ] No secrets in client-side code or git history
+- [ ] Dependencies updated, no critical vulnerabilities (`npm audit`)
+- [ ] Forms protected against spam (honeypot, rate limiting, or captcha)
+- [ ] File uploads validated and sanitized (if applicable)
+
+## Performance
+
+- [ ] [Lighthouse](https://pagespeed.web.dev/) score 90+ on all metrics
+- [ ] Core Web Vitals passing
+  - [ ] LCP < 2.5s (Largest Contentful Paint)
+  - [ ] INP < 200ms (Interaction to Next Paint)
+  - [ ] CLS < 0.1 (Cumulative Layout Shift)
+- [ ] Images optimized
+  - [ ] Modern formats (WebP, AVIF)
+  - [ ] Proper sizing (no 2000px images in 200px containers)
+  - [ ] Lazy loading for below-fold images
+- [ ] CSS/JS minified and bundled
+- [ ] Gzip or Brotli compression enabled
+- [ ] Caching headers set for static assets
+- [ ] No render-blocking resources
+- [ ] Fonts optimized (subset, `font-display: swap`)
+
+## SEO
+
+- [ ] Unique title tag per page (50-60 characters)
+- [ ] Meta descriptions written (150-160 characters)
+- [ ] Single H1 per page, logical heading hierarchy
+- [ ] sitemap.xml generated and submitted
+- [ ] robots.txt configured
+- [ ] Canonical URLs set for duplicate content
+- [ ] Open Graph tags for social sharing
+  - [ ] og:title, og:description, og:image
+  - [ ] Test with [Facebook Debugger](https://developers.facebook.com/tools/debug/)
+- [ ] Structured data where relevant ([Schema.org](https://schema.org/), test with [Rich Results Test](https://search.google.com/test/rich-results))
+- [ ] [Google Search Console](https://search.google.com/search-console) verified
+- [ ] Old URLs redirect properly (no 404s for existing pages)
+
+## Accessibility <SideNote>~15% of users</SideNote>
+
+- [ ] Run automated audit (axe DevTools, WAVE, or Lighthouse)
+- [ ] Color contrast meets WCAG AA (4.5:1 for text)
+  - [ ] Test with [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [ ] All images have descriptive alt text
+- [ ] Keyboard navigation works (Tab, Enter, Escape)
+- [ ] Focus states are visible
+- [ ] Form inputs have associated labels
+- [ ] Error messages are announced to screen readers
+- [ ] Skip link to main content
+- [ ] No content flashes more than 3 times per second
+- [ ] Test with a screen reader (VoiceOver, NVDA)
+
+## Cross-browser & Devices <SideNote>not everyone uses Chrome on MacBooks</SideNote>
+
+- [ ] Test on real mobile devices (not just DevTools)
+- [ ] Test major browsers
+  - [ ] Chrome
+  - [ ] Firefox
+  - [ ] Safari
+  - [ ] Edge
+- [ ] Test different screen sizes (mobile, tablet, desktop)
+- [ ] Touch targets are at least 44x44px
+- [ ] No horizontal scrolling on mobile
+- [ ] Text is readable without zooming (16px minimum)
+- [ ] viewport meta tag is correct
+
+## Analytics & Monitoring
+
+- [ ] Analytics installed (Plausible or GA4)
+- [ ] Key events tracked (signups, purchases, etc.)
+- [ ] Test that events fire correctly
+- [ ] Error tracking configured
+- [ ] Uptime monitoring set up
+- [ ] Alerts configured (downtime, error spikes)
+
+## Infrastructure
+
+- [ ] DNS configured and propagated
+- [ ] Domain auto-renewal enabled
+- [ ] SSL certificate auto-renews
+- [ ] Backups configured and tested
+- [ ] CDN configured (if needed)
+- [ ] Environment variables documented
+- [ ] Deployment process documented
+- [ ] Rollback process tested
+- [ ] Email deliverability configured (SPF/DKIM if sending emails)
+
+## Pre-flight
+
+- [ ] Test the complete user journey (start to finish)
+- [ ] Test on a device you haven't used yet
+- [ ] Have someone else try to break it
+- [ ] Remove any debug code, test accounts, or staging data
+- [ ] Double-check production environment variables
+- [ ] Prepare launch announcement
+- [ ] Take screenshots for portfolio/marketing
+- [ ] Celebrate (you earned it)
+
+<ChecklistInteractive />

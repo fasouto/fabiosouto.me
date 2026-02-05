@@ -1,0 +1,157 @@
+---
+// Interactive checklist component - saves state to localStorage
+---
+
+<div class="checklist-controls">
+  <span class="checklist-progress"></span>
+  <button class="checklist-reset">Reset all</button>
+</div>
+
+<script>
+  const STORAGE_KEY = 'prelaunch-checklist';
+
+  function initChecklist() {
+    const checkboxes = document.querySelectorAll('.article-content input[type="checkbox"]');
+    const progress = document.querySelector('.checklist-progress');
+    const resetBtn = document.querySelector('.checklist-reset');
+
+    if (!checkboxes.length) return;
+
+    // Load saved state (keyed by text content for stability)
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Record<string, boolean>;
+
+    function getItemKey(li: HTMLElement): string {
+      return li.textContent?.trim() || '';
+    }
+
+    function getParentList(checkbox: HTMLElement): HTMLUListElement | null {
+      return checkbox.closest('ul');
+    }
+
+    function saveState() {
+      const state: Record<string, boolean> = {};
+      document.querySelectorAll('.article-content input[type="checkbox"]').forEach((cb) => {
+        const checkbox = cb as HTMLInputElement;
+        const li = checkbox.closest('li');
+        if (li && checkbox.checked) {
+          state[getItemKey(li)] = true;
+        }
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function moveToBottom(li: HTMLElement) {
+      const ul = li.closest('ul');
+      if (ul) {
+        ul.appendChild(li);
+      }
+    }
+
+    function moveToTop(li: HTMLElement) {
+      const ul = li.closest('ul');
+      if (ul) {
+        // Find first checked item or end of list
+        const firstChecked = ul.querySelector('li.checked');
+        if (firstChecked) {
+          ul.insertBefore(li, firstChecked);
+        } else {
+          ul.appendChild(li);
+        }
+      }
+    }
+
+    function updateProgress() {
+      const checked = document.querySelectorAll('.article-content input[type="checkbox"]:checked').length;
+      const total = document.querySelectorAll('.article-content input[type="checkbox"]').length;
+      if (progress) progress.textContent = checked + ' / ' + total + ' completed';
+    }
+
+    // Initialize checkboxes
+    checkboxes.forEach((cb) => {
+      const checkbox = cb as HTMLInputElement;
+      const li = checkbox.closest('li');
+
+      // Enable the checkbox
+      checkbox.removeAttribute('disabled');
+
+      // Restore saved state
+      if (li && saved[getItemKey(li)]) {
+        checkbox.checked = true;
+        li.classList.add('checked');
+      }
+
+      checkbox.addEventListener('change', () => {
+        if (!li) return;
+
+        if (checkbox.checked) {
+          li.classList.add('checked');
+          moveToBottom(li);
+        } else {
+          li.classList.remove('checked');
+          moveToTop(li);
+        }
+
+        saveState();
+        updateProgress();
+      });
+    });
+
+    // Move all checked items to bottom of their lists on load
+    document.querySelectorAll('.article-content li.checked').forEach((li) => {
+      moveToBottom(li as HTMLElement);
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      if (confirm('Reset all checkboxes?')) {
+        document.querySelectorAll('.article-content input[type="checkbox"]').forEach((cb) => {
+          const checkbox = cb as HTMLInputElement;
+          const li = checkbox.closest('li');
+          checkbox.checked = false;
+          li?.classList.remove('checked');
+        });
+        localStorage.removeItem(STORAGE_KEY);
+        updateProgress();
+      }
+    });
+
+    updateProgress();
+  }
+
+  // Run on page load and after Astro navigation
+  initChecklist();
+  document.addEventListener('astro:page-load', initChecklist);
+</script>
+
+<style>
+  .checklist-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #f5f2ed;
+    border-radius: 8px;
+  }
+
+  .checklist-progress {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .checklist-reset {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .checklist-reset:hover {
+    border-color: #b85c38;
+    color: #b85c38;
+  }
+</style>
