@@ -5,6 +5,9 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 <DefaultLayout title="About">
   <section class="about my-24">
     <div class="container">
+      <header class="about-header">
+        <h1>About</h1>
+      </header>
       <div class="about-grid">
         <div class="about-content">
           <p>I'm a product leader with a technical background and 15+ years building for the web. I still love it.</p>
@@ -24,6 +27,20 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 </DefaultLayout>
 
 <style>
+  .about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .about-header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
   .about-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -63,6 +80,13 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
   .about-image img {
     width: 100%;
     height: auto;
+  }
+
+  @media (max-width: 767px) {
+    .about-image img {
+      max-width: 200px;
+      margin: 0 auto;
+    }
   }
 
   .note {
