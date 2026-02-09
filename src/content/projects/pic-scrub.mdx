@@ -1,8 +1,20 @@
 ---
 title: PicScrub
-subtitle: Strip EXIF metadata from your photos entirely in the browser. No uploads, no servers.
+subtitle: Strip EXIF metadata from your photos entirely in the browser.
 description: Remove EXIF data from photos in your browser
 tags: ["Privacy", "Images"]
 ---
 
-Strip EXIF metadata from your photos entirely in the browser. No uploads, no servers, just clean images.
+This is the kind of project where you start small and end up in a rabbit hole. It began with wanting to understand how JPEG files actually work. It took more time than I'd like to admit.
+
+PicScrub removes EXIF, GPS, and other metadata from images. It works through direct binary manipulation rather than re-encoding, so image quality stays intact. Supports JPEG, PNG, WebP, GIF, SVG, TIFF, HEIC, DNG, and RAW formats.
+
+Available as an [npm package](https://www.npmjs.com/package/picscrub) with zero dependencies, or use it directly at [picscrub.com](https://picscrub.com/). Everything runs in your browser, no uploads, no servers.
+
+![PicScrub app](/projects/pic-scrub-app.png)
+
+I also wrote a [guide on image formats](https://picscrub.com/guides/image-formats) while researching this.
+
+![JPEG file structure](/projects/pic-scrub-jpeg.png)
+
+[Source on GitHub](https://github.com/fasouto/picscrub)

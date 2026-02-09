@@ -16,7 +16,7 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
 ---
 
 <DefaultLayout title={article.data.title}>
-  <article class="article my-24">
+  <article class="article my-16">
     <header class="article-header container">
       <h1 class="article-title">{article.data.title}</h1>
       {article.data.subtitle && (
@@ -197,12 +197,10 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
   /* Links */
   .article-content a {
     color: #b85c38;
-    text-decoration: underline;
-    text-decoration-color: #b85c3866;
-    text-underline-offset: 2px;
+    text-decoration: none;
   }
 
   .article-content a:hover {
-    text-decoration-color: #b85c38;
+    text-decoration: underline;
   }
 </style>

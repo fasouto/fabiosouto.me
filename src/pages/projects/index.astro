@@ -6,11 +6,10 @@ const projects = await getCollection('projects')
 ---
 
 <DefaultLayout title="Projects">
-  <section class="projects my-24">
+  <section class="projects my-16">
     <div class="container">
       <header class="projects-header">
-        <h1>Side Projects</h1>
-        <p class="header-note">things I build for fun</p>
+        <h1>Side Projects <span class="header-note">things I build for fun</span></h1>
       </header>
       <ul class="project-list">
         {projects.map((project) => (
@@ -38,7 +37,6 @@ const projects = await getCollection('projects')
 
 <style>
   .projects-header {
-    text-align: center;
     margin-bottom: 4rem;
   }
 
@@ -53,9 +51,10 @@ const projects = await getCollection('projects')
 
   .header-note {
     font-family: 'Caveat', cursive;
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-size: 0.5em;
+    font-weight: 400;
     color: #b85c38;
-    margin: 0;
+    margin-left: 0.5rem;
     transform: rotate(-1deg);
     display: inline-block;
   }

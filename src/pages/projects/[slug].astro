@@ -15,7 +15,7 @@ const { Content } = await render(project)
 ---
 
 <DefaultLayout title={project.data.title}>
-  <article class="project my-24">
+  <article class="project my-16">
     <div class="container">
       <header class="project-header">
         <h1 class="project-title">{project.data.title}</h1>
@@ -64,5 +64,10 @@ const { Content } = await render(project)
     font-family: 'EB Garamond', serif;
     font-size: 1.2rem;
     line-height: 1.8;
+  }
+
+  .project-content :global(img) {
+    border-radius: 10px;
+    margin: 1.5rem 0;
   }
 </style>
