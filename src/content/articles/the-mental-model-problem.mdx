@@ -31,9 +31,18 @@ Going back to manual coding feels impossibly slow. Why would you? Don't you have
 
 The main problem is that the code just... looks correct. Clean variable names. Familiar patterns. Plausible explanations. The right amount of comments. Your brain relaxes. I've nodded along to AI code that was confidently, politely, totally wrong. Tests passed. But the logic was broken in a way I only caught because I traced through it manually.
 
-Maybe the worst offender (at least for me) are AI-generated tests. I've seen it create a mock and then test the mock. Or tests that assert the function returns what it returns. Circular nonsense that looks like coverage but tests nothing. If you're not paying attention, you'll merge it and feel good about your test suite.
+Maybe the worst offender is AI-generated tests. I've seen it mock everything, then test the mock. Tests that assert a function returns what it returns. Circular nonsense that looks like coverage but tests nothing. If you're not paying attention, you'll merge it and feel good about your test suite.
 
 Sometimes you need to stop prompting and just open your favorite editor. Resist the dopamine hit.
+
+## Two kinds of code
+
+I've started splitting code into two buckets:
+
+- Code I don't need to model: low risk, follows conventions, easy to verify
+- Code I can't help modeling: business-critical, novel, touches multiple systems
+
+AI handles the first bucket well. The second is where understanding actually forms. That's where it gets interesting. That's the part I can't afford to skip.
 
 ## When vibe coding works
 
