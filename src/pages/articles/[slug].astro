@@ -18,7 +18,7 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
 <DefaultLayout title={article.data.title}>
   <article class="article my-16">
     <header class="article-header container">
-      <h1 class="article-title">{article.data.title}</h1>
+      <h1 class="page-title article-title">{article.data.title}</h1>
       {article.data.subtitle && (
         <p class="article-subtitle">{article.data.subtitle}</p>
       )}
@@ -59,19 +59,14 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
   }
 
   .article-title {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: #1a1a1a;
     margin: 0 0 0.25rem 0;
   }
 
   .article-subtitle {
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-note);
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 400;
-    color: #b85c38;
+    color: var(--color-accent);
     margin: 0;
     transform: rotate(-1deg);
     display: inline-block;
@@ -79,29 +74,29 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
 
   .article-date {
     display: block;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.9rem;
-    color: #888;
+    color: var(--color-text-faint);
     margin-top: 1rem;
   }
 
   .article-content {
     position: relative;
-    font-family: 'EB Garamond', serif;
+    font-family: var(--font-serif);
     font-size: 1.3rem;
   }
 
   .article-content h2,
   .article-content h3,
   .article-content h4 {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-heading);
     font-weight: 600;
   }
 
   .sidenote {
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-note);
     font-size: 1.3rem;
-    color: #b85c38;
+    color: var(--color-accent);
     transform: rotate(-1deg);
   }
 
@@ -126,17 +121,11 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
       display: block;
       margin: 1rem 0;
       padding-left: 1rem;
-      border-left: 2px solid #b85c38;
+      border-left: 2px solid var(--color-accent);
     }
   }
 
-  /* Code block styling */
-  .article-content pre {
-    background-color: #f5f2ed;
-    border: 1px solid #e0dcd4;
-    border-radius: 8px;
-  }
-
+  /* Code block styling (block surface comes from the global pre rule) */
   .article-content code {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
     color: #c7254e;
@@ -150,14 +139,14 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
   }
 
   .article-content :not(pre) > code {
-    background-color: #f5f2ed;
+    background-color: var(--color-surface);
     padding: 0 0.3em;
     border-radius: 4px;
     white-space: nowrap;
   }
 
   .article-content pre code {
-    color: #1a1a1a;
+    color: var(--foreground-color);
     font-size: 0.9rem;
   }
 
@@ -166,7 +155,7 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
     cursor: pointer;
     width: 18px;
     height: 18px;
-    accent-color: #b85c38;
+    accent-color: var(--color-accent);
     margin-right: 0.5rem;
     vertical-align: middle;
     position: relative;
@@ -196,7 +185,7 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
 
   /* Links */
   .article-content a {
-    color: #b85c38;
+    color: var(--color-accent);
     text-decoration: none;
   }
 

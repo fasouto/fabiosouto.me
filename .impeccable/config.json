@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-08-24T16:40:06.860Z",
+        "reason": "Incumbent site identity: Inter is the established UI/display face paired with EB Garamond and Caveat; audit flagged it as a taste call and the user chose refinement passes that preserve the incumbent world, not a font replacement"
+      }
+    ]
+  }
+}

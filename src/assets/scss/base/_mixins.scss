@@ -24,11 +24,10 @@
 }
 
 @mixin outline {
-  outline: 2px dashed black;
-  outline-color: black;
-  outline-offset: 0;
-  -webkit-box-shadow: 0 0 0 2px white;
-  box-shadow: 0 0 0 2px white;
+  outline: 2px dashed var(--color-accent, black);
+  outline-offset: 2px;
+  -webkit-box-shadow: 0 0 0 2px var(--brand-paper, white);
+  box-shadow: 0 0 0 2px var(--brand-paper, white);
 }
 
 @mixin sr-only {

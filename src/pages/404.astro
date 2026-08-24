@@ -21,11 +21,11 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
   }
 
   .title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(5rem, 15vw, 8rem);
     font-weight: 900;
-    letter-spacing: -4px;
-    color: #1a1a1a;
+    letter-spacing: -0.04em;
+    color: var(--foreground-color);
     margin: 0;
     line-height: 1;
   }
@@ -36,9 +36,9 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
   }
 
   .message {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: clamp(1.25rem, 3vw, 1.5rem);
-    color: #555;
+    color: var(--color-text-muted);
     margin: 0;
   }
 
@@ -47,9 +47,9 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
     left: calc(50% + 140px);
     top: 50%;
     transform: translateY(-50%) rotate(-2deg);
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-note);
     font-size: 1.5rem;
-    color: #b85c38;
+    color: var(--color-accent);
     white-space: nowrap;
   }
 
@@ -64,10 +64,10 @@ import DefaultLayout from '@layouts/DefaultLayout.astro'
 
   .home-link {
     display: block;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 1rem;
     font-weight: 600;
-    color: #b85c38;
+    color: var(--color-accent);
     text-decoration: none;
   }
 

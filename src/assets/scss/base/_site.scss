@@ -1,0 +1,22 @@
+// Site-specific type roles and browser surfaces.
+// Tokens live in _root.scss; this file holds the shared roles built from them.
+
+// Big page heading: about, articles, projects, article/project detail.
+.page-title {
+  margin: 0;
+  color: var(--foreground-color);
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+// Browser surfaces carry the palette too.
+::selection {
+  background-color: var(--color-accent);
+  color: var(--brand-paper);
+}
+
+body {
+  caret-color: var(--color-accent);
+}

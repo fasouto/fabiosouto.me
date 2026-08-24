@@ -18,7 +18,7 @@ const { Content } = await render(project)
   <article class="project my-16">
     <div class="container">
       <header class="project-header">
-        <h1 class="project-title">{project.data.title}</h1>
+        <h1 class="page-title project-title">{project.data.title}</h1>
         {project.data.subtitle && (
           <p class="project-subtitle">{project.data.subtitle}</p>
         )}
@@ -40,19 +40,14 @@ const { Content } = await render(project)
   }
 
   .project-title {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: #1a1a1a;
     margin: 0 0 0.25rem 0;
   }
 
   .project-subtitle {
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-note);
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 400;
-    color: #b85c38;
+    color: var(--color-accent);
     margin: 0;
     transform: rotate(-1deg);
     display: inline-block;
@@ -61,7 +56,7 @@ const { Content } = await render(project)
   .project-content {
     max-width: 800px;
     margin: 0 auto;
-    font-family: 'EB Garamond', serif;
+    font-family: var(--font-serif);
     font-size: 1.2rem;
     line-height: 1.8;
   }

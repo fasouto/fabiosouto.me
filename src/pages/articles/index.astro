@@ -10,7 +10,7 @@ const sortedArticles = articles.sort((a, b) => b.data.date.getTime() - a.data.da
   <section class="articles my-16">
     <div class="container">
       <header class="articles-header">
-        <h1>Articles</h1>
+        <h1 class="page-title">Articles</h1>
       </header>
       <ul class="article-list">
         {sortedArticles.map((article) => (
@@ -36,15 +36,6 @@ const sortedArticles = articles.sort((a, b) => b.data.date.getTime() - a.data.da
     margin-bottom: 4rem;
   }
 
-  .articles-header h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: #1a1a1a;
-    margin: 0;
-  }
-
   .article-list {
     list-style: none;
     padding: 0;
@@ -64,25 +55,25 @@ const sortedArticles = articles.sort((a, b) => b.data.date.getTime() - a.data.da
   }
 
   .article-title {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-heading);
     font-size: clamp(1.5rem, 4vw, 2.25rem);
     font-weight: 600;
-    color: #1a1a1a;
+    color: var(--foreground-color);
     margin: 0 0 0.25rem 0;
   }
 
   .article-subtitle {
-    font-family: 'Caveat', cursive;
+    font-family: var(--font-note);
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 400;
-    color: #b85c38;
+    color: var(--color-accent);
     margin: 0;
     transform: rotate(-1deg);
     display: inline-block;
   }
 
   .article-item a:hover .article-title {
-    color: #b85c38;
+    color: var(--color-accent);
   }
 
   .rss-link {
@@ -91,13 +82,13 @@ const sortedArticles = articles.sort((a, b) => b.data.date.getTime() - a.data.da
   }
 
   .rss-link a {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.9rem;
-    color: #888;
+    color: var(--color-text-faint);
     text-decoration: none;
   }
 
   .rss-link a:hover {
-    color: #b85c38;
+    color: var(--color-accent);
   }
 </style>
