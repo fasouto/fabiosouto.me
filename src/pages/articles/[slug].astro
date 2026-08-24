@@ -125,30 +125,7 @@ const updatedDate = article.data.updated ? new Date(article.data.updated) : null
     }
   }
 
-  /* Code block styling (block surface comes from the global pre rule) */
-  .article-content code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    color: #c7254e;
-    font-size: 0.85rem;
-    vertical-align: text-bottom;
-  }
-
-  .article-content code::before,
-  .article-content code::after {
-    content: none !important;
-  }
-
-  .article-content :not(pre) > code {
-    background-color: var(--color-surface);
-    padding: 0 0.3em;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-
-  .article-content pre code {
-    color: var(--foreground-color);
-    font-size: 0.9rem;
-  }
+  /* Code styling is shared with project pages in base/_site.scss */
 
   /* Interactive checkboxes */
   .article-content input[type="checkbox"] {

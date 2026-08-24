@@ -11,6 +11,37 @@
   letter-spacing: -0.02em;
 }
 
+// Code inside long-form content (articles and project pages).
+.article-content code,
+.project-content code {
+  font-family: ui-monospace, sfmono-regular, menlo, monaco, consolas, monospace !important;
+  font-size: 0.85rem;
+  color: var(--color-code);
+  vertical-align: text-bottom;
+}
+
+// The Tailwind prose class wraps inline code in backticks; suppress them.
+.article-content code::before,
+.article-content code::after,
+.project-content code::before,
+.project-content code::after {
+  content: none !important;
+}
+
+.article-content :not(pre) > code,
+.project-content :not(pre) > code {
+  background-color: var(--color-surface);
+  padding: 0 0.3em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.article-content pre code,
+.project-content pre code {
+  color: var(--foreground-color);
+  font-size: 0.9rem;
+}
+
 // Browser surfaces carry the palette too.
 ::selection {
   background-color: var(--color-accent);
