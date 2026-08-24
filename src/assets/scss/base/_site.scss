@@ -42,6 +42,13 @@
   font-size: 0.9rem;
 }
 
+// Plain-text blocks carry terminal output and ASCII art: the line
+// box must stay tight so box-drawing characters connect vertically.
+.article-content pre[data-language='text'],
+.project-content pre[data-language='text'] {
+  line-height: 1.2;
+}
+
 // Browser surfaces carry the palette too.
 ::selection {
   background-color: var(--color-accent);

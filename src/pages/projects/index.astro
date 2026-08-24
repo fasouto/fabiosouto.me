@@ -2,7 +2,9 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import { getCollection } from 'astro:content'
 
-const projects = await getCollection('projects')
+const projects = (await getCollection('projects')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+)
 ---
 
 <DefaultLayout title="Projects">

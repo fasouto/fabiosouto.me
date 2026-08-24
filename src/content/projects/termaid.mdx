@@ -3,6 +3,7 @@ title: Termaid
 subtitle: Mermaid diagrams in your terminal
 description: Render Mermaid diagrams as Unicode text art
 tags: ["Python", "CLI", "Developer Tools"]
+order: 1
 ---
 
 I was building a source code examination tool and wanted it to show diagrams without leaving the terminal. Mermaid is everywhere, but every renderer needs a browser, and there was no native Python library you could just import. So I wrote one. It grew more than I expected: Termaid now renders 18 diagram types, from flowcharts and sequence diagrams to git graphs and mindmaps, all as Unicode text art.
@@ -13,6 +14,29 @@ It's pure Python with zero dependencies. If you have Rich installed you get colo
 
 ![Termaid playground rendering a flowchart](/projects/termaid-playground.png)
 
-The playground at [termaid.com](https://termaid.com/) runs the actual package in your browser through Pyodide, so what you see is exactly what your terminal will print.
+The playground at [termaid.com](https://termaid.com/) runs the actual package in your browser through [Pyodide](https://pyodide.org/en/stable/), a full CPython interpreter compiled to WebAssembly. Your browser downloads Python, imports termaid, and prints boxes made of text. We live in the future. Here's the pipeline, drawn by termaid itself:
+
+```text
+┌───────────────────────┐
+│    Mermaid source     │
+└───────────┬───────────┘
+            ▼
+┌───────────────────────┐
+│  Pyodide (CPython on  │
+│     WebAssembly)      │
+└───────────┬───────────┘
+            ▼
+┌───────────────────────┐
+│    termaid layout     │
+│        engine         │
+└───────────┬───────────┘
+            ▼
+┌───────────────────────┐
+│  Unicode art in your  │
+│        browser        │
+└───────────────────────┘
+```
+
+No mockups involved: what you see in the playground is exactly what your terminal will print.
 
 Try it with `pip install termaid` or `uvx termaid`. [Source on GitHub](https://github.com/fasouto/termaid).
