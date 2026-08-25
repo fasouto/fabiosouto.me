@@ -6,7 +6,9 @@ tags: ["Python", "CLI", "Developer Tools"]
 order: 1
 ---
 
-I was building a source code examination tool and wanted it to show diagrams without leaving the terminal. Mermaid is everywhere, but every renderer needs a browser, and there was no native Python library you could just import. So I wrote one. It grew more than I expected: Termaid now renders 18 diagram types, from flowcharts and sequence diagrams to git graphs and mindmaps, all as Unicode text art.
+I was building a source code examination tool: it would read your codebase with AI and generate Mermaid diagrams of it, so you could zoom around different codebases and actually build a [mental model](/articles/the-mental-model-problem/) of the code. I needed it to show those diagrams without leaving the terminal, and Mermaid is everywhere, but every renderer needs a browser and there was no native Python library you could just import. So I wrote one.
+
+I never finished the examination tool. But we still had Termaid, and it grew more than I expected: it now renders 18 diagram types, from flowcharts and sequence diagrams to git graphs and mindmaps, all as Unicode text art.
 
 The fun part was doing graph layout without a browser. Termaid parses the Mermaid syntax, places nodes on a grid using a barycenter heuristic (each node drifts toward the average position of its neighbors until the graph untangles itself), then routes every arrow with A* pathfinding so edges take clean right-angle turns instead of crashing through boxes. It also auto-fits diagrams to your terminal width, compacting them progressively when space gets tight.
 
