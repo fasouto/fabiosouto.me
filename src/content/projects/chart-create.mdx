@@ -1,19 +1,23 @@
 ---
 title: ChartCreate
-subtitle: A friendly interface for Apache ECharts
-description: A visual frontend for Apache ECharts
+subtitle: Charts, tier lists and bar races in the browser
+description: A visual chart maker built on Apache ECharts
 tags: ["Charts", "Data Visualization"]
 order: 4
 ---
 
 [Apache ECharts](https://echarts.apache.org/en/index.html) is one of those projects I keep coming back to. It strikes a good balance between control and ease of use: powerful enough for complex visualizations, simple enough to get something working quickly.
 
-I wanted to build a frontend where people could create charts visually and export them as PNG or JPG without writing code. ChartCreate does that. You can also render charts in XKCD style or with a hand-drawn look using rough.js.
+I wanted to build a frontend where people could create charts visually and export them as PNG or JPG without writing code. ChartCreate does that: paste your data, pick a style, download. You can also render charts in XKCD style or with a hand-drawn look using rough.js.
 
-![Heatmap chart editor](/projects/chart-create-heatmap.png)
+![ChartCreate homepage with a pizza toppings tier list and a dog versus cat alignment chart](/projects/chart-create-home.png)
 
-Choosing the right chart for your data isn't obvious. Bar chart? Line chart? Heatmap? I added a wizard that asks what you're trying to show, whether that's comparing items, tracking change over time, or finding patterns, and recommends the best chart type for the job.
+It started as a serious charting tool, but the charts people actually share are the silly ones. So I added a few memesque formats: alignment charts (lawful good to chaotic evil, any 3 by 3 you like), tier lists from S to F, and tournament brackets. Drop images straight into the cells and you're done.
 
-![Chart type wizard](/projects/chart-create-selector.png)
+There are also animated charts. Bar races and bubble races play your data over time, and you can export them as MP4 or GIF. All of it, including the video encoding, happens in the browser: nothing is uploaded, there is no server rendering the frames, and you don't need an account.
+
+![The bar race editor animating rankings over time](/projects/chart-create-bar-race.png)
+
+Choosing the right chart for your data isn't obvious. Bar chart? Line chart? Heatmap? There's a guide that asks what you're trying to show, whether that's comparing items, tracking change over time, or finding patterns, and recommends the best chart type for the job.
 
 Try it at [chartcreate.com](https://chartcreate.com/).
