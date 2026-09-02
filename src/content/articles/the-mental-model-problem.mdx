@@ -7,31 +7,31 @@ draft: false
 
 import SideNote from '@components/SideNote.astro'
 
-I had some legacy code from a side project that I kept procrastinating on, until a month ago I decided to refactor it with Claude Code, and to be honest it felt like magic. All it took was 10 or 15 prompts and suddenly the tests passed, the project was modernised, I deployed it and moved on to something else. A week later the server started crashing because of a memory leak. <SideNote>i18n issue</SideNote> When I got the alert I opened the project to fix it and realised I had absolutely no idea where to start.
+I had some legacy code from a side project that I kept procrastinating on, until a month ago I decided to refactor it with Claude Code. To be honest it felt like magic. All it took was 10 or 15 prompts and suddenly the tests passed, the project was modernised, I deployed it and moved on to something else. A week later the server started crashing because of a memory leak. <SideNote>i18n issue</SideNote> When I got the alert I opened the project to fix it and realised I had absolutely no idea where to start.
 
 The problem is that I skipped the slow part of coding, and the slow part, it turns out, is where you learn how your own project works.
 
 ## The map you're not building
 
-When you write code yourself you're doing more than just typing. Every bug you chase and every weird edge case you hit ("why the hell is this happening?") goes into a mental map of the codebase, and after a while you can find your way around it because you suffered through building it.
+When you write code yourself you're doing more than typing. Every bug you chase and every weird edge case you hit ("why the hell is this happening?") goes into a mental map of the codebase, and after a while you can find your way around it because you suffered through building it.
 
 When the model writes the code, none of that happens. You get something that works, looks reasonable and runs fine, you think "cool, next task", and no map gets built. You end up lost in a codebase that is supposedly yours.
 
-There's also a second thing you lose. While coding you're also thinking about the product: you hit an edge case and suddenly you're asking what should actually happen there. Some of my best product ideas came while writing code, not in meetings, because code forces you to be specific in a way that a spec never does.
+You also lose the thinking that happens while you code. You hit an edge case and suddenly you're asking what should happen there, and that's a product question, not a technical one. Some of my best product ideas came while writing code, not in meetings, because code forces you to be specific in a way that a spec never does.
 
-Typing was never really the bottleneck. Understanding is, and AI lets you skip that as well if you're not careful.
+I used to think typing was the slow part. It isn't. The slow part is understanding what you're building, and AI lets you skip that too if you're not careful.
 
 ## The slot machine
 
 Nir Eyal's [*Hooked*](https://www.nirandfar.com/hooked/) explains how products create habits through variable rewards. <SideNote>great read</SideNote> AI coding works exactly like that. Sometimes it nails in seconds something that would have taken you an hour, you get the little dopamine hit, and you keep pulling the lever even when the odds aren't great. Going back to writing the code by hand feels impossibly slow after that. Why would you, when you have emails to check and other things to do?
 
-The odds also change over time. Every model I've used somehow felt sharper in its first weeks than a few months later. I don't know if the providers quietly tune them down to save costs, if the novelty wears off, or if I just start trusting them with harder tasks, but the feeling is the same every time: the thing that was brilliant in March is a bit dumber by June. An inconsistent payout is precisely what keeps you pulling the lever.
+The odds also change over time. Every model I've used felt sharper in its first weeks than a few months later. I don't know if the providers quietly tune them down, if the novelty wears off, or if I just start trusting them with harder tasks, but the feeling is the same every time: the model that impressed me on day one is a bit dumber by the time I've built a habit around it. And an inconsistent payout is what keeps you pulling the lever.
 
-The bigger problem is that the output looks correct. The variable names are clean, the patterns are familiar, the explanation is plausible and there's a sensible amount of comments, so your brain relaxes. I've nodded along to code that was politely and completely wrong. The tests passed, but the logic was broken in a way I only caught because I traced through it by hand.
+The bigger problem is that the output looks correct. Clean variable names, familiar patterns, a plausible explanation, a sensible amount of comments. Your brain relaxes. I've nodded along to code that was confidently wrong: the tests passed, but the logic was broken in a way I only caught because I traced through it by hand.
 
-AI-generated tests might be the worst offender. I've seen it mock everything and then test the mock, or write tests that assert a function returns whatever it returns. It looks like coverage and tests nothing, and if you're not paying attention you'll merge it and feel good about your test suite.
+AI-generated tests might be the worst offender. I've seen it mock everything and then test the mock, or write tests that assert a function returns whatever it returns. You get the green checkmarks without testing anything, and if you're not paying attention you'll merge it and feel good about your test suite.
 
-Sometimes you have to stop prompting and open the editor, even if it's less fun.
+At some point you have to stop prompting and open the editor, even if it's less fun.
 
 ## Two kinds of code
 
@@ -42,7 +42,7 @@ I've started splitting code into two buckets:
 
 AI handles the first bucket well. I rebuilt [RandomWheel](https://randomwheel.com/) from scratch with Claude Code: small, familiar, easy to verify, and it got most of it right in one go.
 
-The second bucket is where understanding forms, and that's the part I can't afford to skip.
+The second bucket is the code I need to understand myself, and that's the part I can't afford to skip.
 
 So I try to:
 
