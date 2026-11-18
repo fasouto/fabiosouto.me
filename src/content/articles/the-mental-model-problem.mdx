@@ -25,11 +25,11 @@ I used to think typing was the slow part. It isn't. The slow part is understandi
 
 Nir Eyal's [*Hooked*](https://www.nirandfar.com/hooked/) explains how products create habits through variable rewards. <SideNote>great read</SideNote> AI coding works exactly like that. Sometimes it nails in seconds something that would have taken you an hour, you get the little dopamine hit, and you keep pulling the lever even when the odds aren't great. Going back to writing the code by hand feels impossibly slow after that. Why would you, when you have emails to check and other things to do?
 
-The odds also change over time. Every model I've used felt sharper in its first weeks than a few months later. I don't know if the providers quietly tune them down, if the novelty wears off, or if I just start trusting them with harder tasks, but the feeling is the same every time: the model that impressed me on day one is a bit dumber by the time I've built a habit around it. And an inconsistent payout is what keeps you pulling the lever.
+The odds also change over time. Every model I've used felt sharper in its first weeks than a few months later. I don't know if the providers quietly tune them down, if the novelty wears off, or if I just start trusting them with harder tasks, but it happens every time. The model that impressed me on day one is a bit dumber by the time I've built a habit around it, and that inconsistent payout is exactly what keeps you pulling the lever.
 
-The bigger problem is that the output looks correct. Clean variable names, familiar patterns, a plausible explanation, a sensible amount of comments. Your brain relaxes. I've nodded along to code that was confidently wrong: the tests passed, but the logic was broken in a way I only caught because I traced through it by hand.
+The bigger problem is that the output looks correct. It has clean variable names, familiar patterns, a sensible amount of comments and a plausible explanation, so your brain relaxes. I've nodded along to code that was confidently wrong. The tests passed, but the logic was broken in a way I only caught because I traced through it by hand.
 
-AI-generated tests might be the worst offender. I've seen it mock everything and then test the mock, or write tests that assert a function returns whatever it returns. You get the green checkmarks without testing anything, and if you're not paying attention you'll merge it and feel good about your test suite.
+AI-generated tests might be the worst offender. I've seen the model mock everything and then test the mock, or write tests that assert a function returns whatever it returns. You get the green checkmarks without testing anything, and if you're not paying attention you'll merge it and feel good about your test suite.
 
 At some point you have to stop prompting and open the editor, even if it's less fun.
 
@@ -40,7 +40,7 @@ I've started splitting code into two buckets:
 - Code I don't need to model: low risk, follows conventions, easy to verify
 - Code I can't help modeling: business-critical, novel, or touching several systems at once
 
-AI handles the first bucket well. I rebuilt [RandomWheel](https://randomwheel.com/) from scratch with Claude Code: small, familiar, easy to verify, and it got most of it right in one go.
+AI handles the first bucket well. I rebuilt [RandomWheel](https://randomwheel.com/) from scratch with Claude Code. The project is small and familiar, the result is easy to check, and Claude got most of it right in one go.
 
 The second bucket is the code I need to understand myself, and that's the part I can't afford to skip.
 
@@ -52,6 +52,10 @@ So I try to:
 - Write a plan first for bigger tasks, so the mental model exists before the code does
 - Use AI to explain code, not only to write it. I don't see many people doing this and it's one of the best uses I've found
 
-It's definitely a bit slower, but it helps me build in the right direction.
+Since I ran into this problem I've also hooked [termaid](https://github.com/fasouto/termaid) into Claude Code. It renders Mermaid diagrams in the terminal, so after a change Claude draws a diagram of what it touched and how the pieces connect. I read the diagram before I read the diff, and it gives me a regular moment to update my picture of the system.
+
+The lesson for me is that understanding doesn't come for free anymore. When you wrote every line, you learned the system as a side effect. Now you have to set time aside to learn it and keep refreshing that knowledge as the code changes.
+
+All of this is slower, but the next time the server crashes I'll know where to start.
 
 The tools will keep getting better and I'm going to keep using them. I just want to make sure I still understand what they build for me.
